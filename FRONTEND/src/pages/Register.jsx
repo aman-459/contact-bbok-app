@@ -24,7 +24,7 @@ const Register = () => {
 
     try {
       // Backend Register API call (Port 5000)
-      const res = await axios.post('http://localhost:5000/api/auth/register', { name, email, password });
+      const res = await axios.post('https://smart-contact-backend.onrender.com/api/auth/register', { name, email, password });
       login(res.data); // Automatic login after signup
       navigate('/');
     } catch (err) {

@@ -19,7 +19,7 @@ const Dashboard = () => {
   const fetchContacts = async () => {
     try {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
-      const res = await axios.get('http://localhost:5000/api/contacts', config);
+      const res = await axios.get('https://smart-contact-backend.onrender.com/api/contacts', config);
       setContacts(res.data);
     } catch (err) {
       console.error(err.response?.data?.message || 'Failed to fetch contacts');
@@ -42,12 +42,12 @@ const Dashboard = () => {
     try {
       if (editId) {
         // Update Mode
-        const res = await axios.put(`http://localhost:5000/api/contacts/${editId}`, formData, config);
+        const res = await axios.put(`https://smart-contact-backend.onrender.com/api/contacts/${editId}`, formData, config);
         setContacts(contacts.map((c) => (c._id === editId ? res.data : c)));
         setEditId(null);
       } else {
         // Create Mode
-        const res = await axios.post('http://localhost:5000/api/contacts', formData, config);
+        const res = await axios.post('https://smart-contact-backend.onrender.com/api/contacts', formData, config);
         setContacts([res.data, ...contacts]);
       }
       setFormData({ name: '', phone: '', email: '', tag: 'Personal', notes: '' }); // Reset form
@@ -75,7 +75,7 @@ const Dashboard = () => {
     if (window.confirm('Are you sure you want to delete this contact?')) {
       try {
         const config = { headers: { Authorization: `Bearer ${user.token}` } };
-        await axios.delete(`http://localhost:5000/api/contacts/${id}`, config);
+        await axios.delete(`https://smart-contact-backend.onrender.com/api/contacts/${id}`, config);
         setContacts(contacts.filter((c) => c._id !== id));
       } catch (err) {
         alert(err.response?.data?.message || 'Delete failed');
